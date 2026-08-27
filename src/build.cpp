@@ -77,7 +77,10 @@ int __cdecl mod_base_hurry() {
         * (has_fac_built(FAC_HEADQUARTERS, base_id) ? 1 : 2) / 16;
     int divisor = max(1, 10 * b->mineral_surplus);
     int turns = (10 * max(0, mins) + divisor - 1) / divisor;
-
+    if (credits > 9999 && b->faction_id == MapWin->cOwner)
+    {
+        return hurry_item(base_id, mins, cost);
+    }
     if (!is_cheap || mins < 1 || cost < 1 || credits - cost < reserve) {
         return 0;
     }
